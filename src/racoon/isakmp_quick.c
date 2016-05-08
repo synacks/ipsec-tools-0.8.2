@@ -174,14 +174,14 @@ end:
 	return error;
 }
 
+
+
 /*
  * send to responder
  * 	HDR*, HASH(1), SA, Ni [, KE ] [, IDi2, IDr2 ] [, NAT-OAi, NAT-OAr ]
  */
 int
-quick_i1send(iph2, msg)
-	struct ph2handle *iph2;
-	vchar_t *msg; /* must be null pointer */
+quick_i1send(struct ph2handle *iph2, vchar_t *msg)/* must be null pointer */
 {
 	vchar_t *body = NULL;
 	vchar_t *hash = NULL;
@@ -389,6 +389,8 @@ end:
 
 	return error;
 }
+
+
 
 /*
  * receive from responder
@@ -773,6 +775,8 @@ end:
 	return error;
 }
 
+
+
 /*
  * send to responder
  * 	HDR*, HASH(3)
@@ -909,14 +913,14 @@ end:
 	return error;
 }
 
+
+
 /*
  * receive from responder
  * 	HDR#*, HASH(4), notify
  */
 int
-quick_i3recv(iph2, msg0)
-	struct ph2handle *iph2;
-	vchar_t *msg0;
+quick_i3recv(struct ph2handle *iph2, vchar_t *msg0)
 {
 	vchar_t *msg = NULL;
 	vchar_t *pbuf = NULL;	/* for payload parsing */
@@ -1052,14 +1056,14 @@ end:
 	return error;
 }
 
+
+
 /*
  * receive from initiator
  * 	HDR*, HASH(1), SA, Ni [, KE ] [, IDi2, IDr2 ] [, NAT-OAi, NAT-OAr ]
  */
 int
-quick_r1recv(iph2, msg0)
-	struct ph2handle *iph2;
-	vchar_t *msg0;
+quick_r1recv(struct ph2handle *iph2, vchar_t *msg0)
 {
 	vchar_t *msg = NULL;
 	vchar_t *hbuf = NULL;	/* for hash computing. */
@@ -1709,15 +1713,15 @@ end:
 	return error;
 }
 
+
+
 /*
  * receive from initiator
  * 	HDR*, HASH(3)
 
  */
 int
-quick_r3recv(iph2, msg0)
-	struct ph2handle *iph2;
-	vchar_t *msg0;
+quick_r3recv(struct ph2handle *iph2, vchar_t *msg0)
 {
 	vchar_t *msg = NULL;
 	vchar_t *pbuf = NULL;	/* for payload parsing */
@@ -1946,13 +1950,13 @@ tunnel_mode_prop(p)
 	return 0;
 }
 
+
+
 /*
  * set SA to kernel.
  */
 int
-quick_r3prep(iph2, msg0)
-	struct ph2handle *iph2;
-	vchar_t *msg0;
+quick_r3prep(struct ph2handle *iph2, vchar_t *msg0)
 {
 	int error = ISAKMP_INTERNAL_ERROR;
 
@@ -2061,13 +2065,14 @@ end:
 	return error;
 }
 
+
+
+
 /*
  * create HASH, body (SA, NONCE) payload with isakmp header.
  */
 static vchar_t *
-quick_ir1mx(iph2, body, hash)
-	struct ph2handle *iph2;
-	vchar_t *body, *hash;
+quick_ir1mx(struct ph2handle *iph2, vchar_t *body, vchar_t *hash)
 {
 	struct isakmp *isakmp;
 	vchar_t *buf = NULL, *new = NULL;
@@ -2127,13 +2132,13 @@ end:
 	return buf;
 }
 
+
 /*
  * get remote's sainfo.
  * NOTE: this function is for responder.
  */
 static int
-get_sainfo_r(iph2)
-	struct ph2handle *iph2;
+get_sainfo_r(struct ph2handle *iph2)
 {
 	vchar_t *idsrc = NULL, *iddst = NULL, *client = NULL;
 	int error = ISAKMP_INTERNAL_ERROR;
