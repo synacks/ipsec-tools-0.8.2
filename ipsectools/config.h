@@ -1,0 +1,1 @@
+#define HAVE_PRINT_ISAKMP_C 1
